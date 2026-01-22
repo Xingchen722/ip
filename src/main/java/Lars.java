@@ -43,6 +43,41 @@ public class Lars {
                 System.out.println("    " + tasks[index]);
                 System.out.println("------------------------------------------------------------");
 
+            } else if (command.equals("todo")) {
+                tasks[num] = new Todo(parts[1]);
+                num++;
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println("    " + tasks[num - 1].toString());
+                System.out.println("Now you have " + num + " tasks in the list.");
+                System.out.println("------------------------------------------------------------");
+
+            }else if (command.equals("deadline")) {
+                String[] split = parts[1].split(" /by ");
+                String status = split[0];
+                String by = split[1];
+                tasks[num] = new Deadline(status, by);
+                num++;
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + tasks[num - 1].toString());
+                System.out.println("Now you have " + num + " tasks in the list.");
+                System.out.println("------------------------------------------------------------");
+
+            }else if(command.equals("event")) {
+                String[] split = parts[1].split(" /from ");
+                String status = split[0];
+                String[] split2 = split[1].split(" /to ");
+                String from = split2[0];
+                String to = split2[1];
+                tasks[num] = new Event(status, from, to);
+                num++;
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + tasks[num - 1].toString());
+                System.out.println("Now you have " + num + " tasks in the list.");
+                System.out.println("------------------------------------------------------------");
+
             } else {
                 if (num < tasks.length) {
                     tasks[num] = new Task(input);
