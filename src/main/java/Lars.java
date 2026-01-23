@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Lars {
@@ -23,7 +24,7 @@ public class Lars {
                         System.out.println("------------------------------------------------------------");
                         break label;
 
-                    case "list":
+                    case "list": {
                         System.out.println("Here are the tasks in your list:");
                         for (int i = 0; i < num; i++) {
                             System.out.println("    " + (i + 1) + ". " + tasks[i]);
@@ -31,6 +32,8 @@ public class Lars {
                         System.out.println("------------------------------------------------------------");
 
                         break;
+                    }
+
                     case "mark": {
                         if (parts.length < 2) {
                             throw new LarsException("Please specify which task to mark.");
@@ -48,6 +51,7 @@ public class Lars {
                         System.out.println("------------------------------------------------------------");
                         break;
                     }
+
                     case "unmark": {
                         if (parts.length < 2) {
                             throw new LarsException("Please specify which task to mark.");
@@ -65,7 +69,8 @@ public class Lars {
                         System.out.println("------------------------------------------------------------");
                         break;
                     }
-                    case "todo":
+
+                    case "todo": {
                         if (parts.length < 2) {
                             throw new LarsException("The description of a todo cannot be empty.");
                         }
@@ -77,6 +82,8 @@ public class Lars {
                         System.out.println("Now you have " + num + " tasks in the list.");
                         System.out.println("------------------------------------------------------------");
                         break;
+                    }
+
                     case "deadline": {
                         if (parts.length < 2) {
                             throw new
@@ -94,6 +101,7 @@ public class Lars {
                         System.out.println("------------------------------------------------------------");
                         break;
                     }
+
                     case "event": {
                         if (parts.length < 2) {
                             throw new
@@ -109,6 +117,26 @@ public class Lars {
 
                         System.out.println("Got it. I've added this task:");
                         System.out.println("  " + tasks[num - 1].toString());
+                        System.out.println("Now you have " + num + " tasks in the list.");
+                        System.out.println("------------------------------------------------------------");
+                        break;
+                    }
+
+                    case "delete" :{
+                        if (parts.length < 2) {
+                            throw new LarsException("Please specify which task to mark.");
+                        }
+
+                        int index = Integer.parseInt(parts[1]) - 1;
+                        if (index < 0 || index >= num) {
+                            throw new LarsException("Invalid task number!");
+                        }
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println("    " + tasks[index]);
+                        for (int i = index; i < num -1; i++) {
+                            tasks[i] = tasks[i + 1];
+                        }
+                        num--;
                         System.out.println("Now you have " + num + " tasks in the list.");
                         System.out.println("------------------------------------------------------------");
                         break;
