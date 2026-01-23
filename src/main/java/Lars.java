@@ -19,7 +19,6 @@ public class Lars {
             try {
                 switch (command) {
                     case "bye":
-                        System.out.println("------------------------------------------------------------");
                         System.out.println("Bye. Hope to see you again soon!");
                         System.out.println("------------------------------------------------------------");
                         break label;
