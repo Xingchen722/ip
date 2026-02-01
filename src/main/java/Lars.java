@@ -1,8 +1,14 @@
-import java.util.Arrays;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 import java.util.Scanner;
 
 public class Lars {
     public static void main(String[] args) {
+        Storage storage = new Storage("./data");
+
         System.out.println("------------------------------------------------------------");
         System.out.println("Hello! I'm Lars");
         System.out.println("What can I do for you?");
@@ -11,6 +17,13 @@ public class Lars {
         Scanner sc = new Scanner(System.in);
         Task[] tasks = new Task[100];
         int num = 0;
+
+        try {
+            num = storage.readTasks(tasks);
+        } catch (LarsException e) {
+            System.out.println("OOPS!!! Failed to read the archive: " + e.getMessage());
+        }
+
 
         label:
         while (true) {
@@ -46,6 +59,7 @@ public class Lars {
                             break;
                         }
                         tasks[index].BeDone();
+                        storage.save(tasks, num);
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println("    " + tasks[index]);
                         System.out.println("------------------------------------------------------------");
@@ -64,6 +78,7 @@ public class Lars {
                             break;
                         }
                         tasks[index].NotDone();
+                        storage.save(tasks, num);
                         System.out.println("OK, I've marked this task as not done yet:");
                         System.out.println("    " + tasks[index]);
                         System.out.println("------------------------------------------------------------");
@@ -76,6 +91,7 @@ public class Lars {
                         }
                         tasks[num] = new Todo(parts[1]);
                         num++;
+                        storage.save(tasks, num);
 
                         System.out.println("Got it. I've added this task:");
                         System.out.println("    " + tasks[num - 1].toString());
@@ -94,6 +110,7 @@ public class Lars {
                         String by = split[1];
                         tasks[num] = new Deadline(status, by);
                         num++;
+                        storage.save(tasks, num);
 
                         System.out.println("Got it. I've added this task:");
                         System.out.println("  " + tasks[num - 1].toString());
@@ -114,6 +131,7 @@ public class Lars {
                         String to = split2[1];
                         tasks[num] = new Event(status, from, to);
                         num++;
+                        storage.save(tasks, num);
 
                         System.out.println("Got it. I've added this task:");
                         System.out.println("  " + tasks[num - 1].toString());
@@ -137,6 +155,7 @@ public class Lars {
                             tasks[i] = tasks[i + 1];
                         }
                         num--;
+                        storage.save(tasks, num);
                         System.out.println("Now you have " + num + " tasks in the list.");
                         System.out.println("------------------------------------------------------------");
                         break;

@@ -1,0 +1,5 @@
+T | 1 | 2103 ip
+T | 0 | 2109 lec note
+T | 0 | 2131 exp
+D | 0 | project meeting | Mon 2pm | 4pm
+D | 0 | return book | Sunday
