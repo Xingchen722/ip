@@ -3,6 +3,7 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Lars {
@@ -23,7 +24,6 @@ public class Lars {
         } catch (LarsException e) {
             System.out.println("OOPS!!! Failed to read the archive: " + e.getMessage());
         }
-
 
         label:
         while (true) {
@@ -52,7 +52,6 @@ public class Lars {
                             throw new LarsException("Please specify which task to mark.");
                         }
                         int index = Integer.parseInt(parts[1]) - 1;
-                        //如果显示已经完成了，就提示一下
                         if(tasks[index].getStatus()) {
                             System.out.println("You have marked this task");
                             System.out.println("------------------------------------------------------------");
@@ -71,7 +70,6 @@ public class Lars {
                             throw new LarsException("Please specify which task to mark.");
                         }
                         int index = Integer.parseInt(parts[1]) - 1;
-                        //如果显示已经改为未完成了，就提示
                         if(!tasks[index].getStatus()) {
                             System.out.println("You have unmarked this task");
                             System.out.println("------------------------------------------------------------");
@@ -107,9 +105,10 @@ public class Lars {
                         }
                         String[] split = parts[1].split(" /by ");
                         String status = split[0];
-                        String by = split[1];
+                        String by =  split[1];
                         tasks[num] = new Deadline(status, by);
                         num++;
+
                         storage.save(tasks, num);
 
                         System.out.println("Got it. I've added this task:");
@@ -129,7 +128,11 @@ public class Lars {
                         String[] split2 = split[1].split(" /to ");
                         String from = split2[0];
                         String to = split2[1];
-                        tasks[num] = new Event(status, from, to);
+
+                        LocalDate fromDate = LocalDate.parse(from);
+                        LocalDate toDate = LocalDate.parse(to);
+
+                        tasks[num] = new Event(status, fromDate, toDate);
                         num++;
                         storage.save(tasks, num);
 

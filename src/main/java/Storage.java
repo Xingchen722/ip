@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Storage {
@@ -51,12 +52,23 @@ public class Storage {
                 boolean isDone = parts[1].equals("1");
                 String description = parts[2];
 
-                Task task = switch (type) {
-                    case "T" -> new task.Todo(description);
-                    case "D" -> new task.Deadline(description, parts[3]);
-                    case "E" -> new task.Event(description, parts[3], parts[4]);
-                    default -> throw new LarsException("Damaged archived data was discovered!");
-                };
+                Task task;
+                switch (type) {
+                    case "T":
+                        task = new task.Todo(description);
+                        break;
+                    case "D":
+                        task = new task.Deadline(description, parts[3]);
+                        break;
+                    case "E":
+                        LocalDate fromDate = LocalDate.parse(parts[3]);
+                        LocalDate toDate = LocalDate.parse(parts[4]);
+                        task = new task.Event(description, fromDate, toDate);
+                        break;
+                    default:
+                        throw new LarsException("Damaged archived data was discovered!");
+                }
+
                 if (isDone) {
                     task.BeDone();
                 }
