@@ -1,5 +1,7 @@
 T | 1 | 2103 ip
-T | 0 | 2109 lec note
-T | 0 | 2131 exp
-D | 0 | project meeting | Mon 2pm | 4pm
-D | 0 | return book | Sunday
+T | 1 | read book
+D | 0 | return book | 2026-12-01T00:00
+D | 0 | lab | 2026-02-01T18:00
+D | 1 | quiz | 2026-02-01T00:00
+D | 0 | study | Sunday
+E | 0 | party | 2026-02-01 | 2026-02-02
