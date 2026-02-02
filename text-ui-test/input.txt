@@ -1,4 +1,8 @@
 todo borrow book
+deadline return library book /by 2026-02-15
+event project meeting /from 2026-02-10 /to 2026-02-10
+deadline return library book /by 2026-02-15 1800
+deadline return book /by Sunday
 todo 2103
 todo 2101
 todo 2109
@@ -13,8 +17,6 @@ list
 delete 1
 delete 2
 list
-deadline return book /by Sunday
-event project meeting /from Mon 2pm /to 4pm
 lllll
 list
 bye

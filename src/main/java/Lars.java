@@ -1,175 +1,38 @@
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
-
-import java.time.LocalDate;
-import java.util.Scanner;
+import Exceptions.LarsException;
 
 public class Lars {
-    public static void main(String[] args) {
-        Storage storage = new Storage("./data");
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-        System.out.println("------------------------------------------------------------");
-        System.out.println("Hello! I'm Lars");
-        System.out.println("What can I do for you?");
-        System.out.println("------------------------------------------------------------");
-
-        Scanner sc = new Scanner(System.in);
-        Task[] tasks = new Task[100];
-        int num = 0;
-
+    public Lars(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            num = storage.readTasks(tasks);
+            //storage.load()用来得到数组
+            tasks = new TaskList(storage.load());
         } catch (LarsException e) {
-            System.out.println("OOPS!!! Failed to read the archive: " + e.getMessage());
+            ui.readError("Failed to load tasks." + e.getMessage());
+            tasks = new TaskList();
         }
+    }
 
-        label:
-        while (true) {
-            String input = sc.nextLine();
-            String[] parts = input.split(" ", 2);
-            String command = parts[0];
+    public void run() {
+        ui.welcome();
+        boolean isExit = false;
+        while(!isExit) {
             try {
-                switch (command) {
-                    case "bye":
-                        System.out.println("Bye. Hope to see you again soon!");
-                        System.out.println("------------------------------------------------------------");
-                        break label;
-
-                    case "list": {
-                        System.out.println("Here are the tasks in your list:");
-                        for (int i = 0; i < num; i++) {
-                            System.out.println("    " + (i + 1) + ". " + tasks[i]);
-                        }
-                        System.out.println("------------------------------------------------------------");
-
-                        break;
-                    }
-
-                    case "mark": {
-                        if (parts.length < 2) {
-                            throw new LarsException("Please specify which task to mark.");
-                        }
-                        int index = Integer.parseInt(parts[1]) - 1;
-                        if(tasks[index].getStatus()) {
-                            System.out.println("You have marked this task");
-                            System.out.println("------------------------------------------------------------");
-                            break;
-                        }
-                        tasks[index].BeDone();
-                        storage.save(tasks, num);
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println("    " + tasks[index]);
-                        System.out.println("------------------------------------------------------------");
-                        break;
-                    }
-
-                    case "unmark": {
-                        if (parts.length < 2) {
-                            throw new LarsException("Please specify which task to mark.");
-                        }
-                        int index = Integer.parseInt(parts[1]) - 1;
-                        if(!tasks[index].getStatus()) {
-                            System.out.println("You have unmarked this task");
-                            System.out.println("------------------------------------------------------------");
-                            break;
-                        }
-                        tasks[index].NotDone();
-                        storage.save(tasks, num);
-                        System.out.println("OK, I've marked this task as not done yet:");
-                        System.out.println("    " + tasks[index]);
-                        System.out.println("------------------------------------------------------------");
-                        break;
-                    }
-
-                    case "todo": {
-                        if (parts.length < 2) {
-                            throw new LarsException("The description of a todo cannot be empty.");
-                        }
-                        tasks[num] = new Todo(parts[1]);
-                        num++;
-                        storage.save(tasks, num);
-
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println("    " + tasks[num - 1].toString());
-                        System.out.println("Now you have " + num + " tasks in the list.");
-                        System.out.println("------------------------------------------------------------");
-                        break;
-                    }
-
-                    case "deadline": {
-                        if (parts.length < 2) {
-                            throw new
-                                    LarsException("The description of a deadline cannot be empty. You can write like 'deadline return book /by Sunday'");
-                        }
-                        String[] split = parts[1].split(" /by ");
-                        String status = split[0];
-                        String by =  split[1];
-                        tasks[num] = new Deadline(status, by);
-                        num++;
-
-                        storage.save(tasks, num);
-
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println("  " + tasks[num - 1].toString());
-                        System.out.println("Now you have " + num + " tasks in the list.");
-                        System.out.println("------------------------------------------------------------");
-                        break;
-                    }
-
-                    case "event": {
-                        if (parts.length < 2) {
-                            throw new
-                                    LarsException("The description of a event cannot be empty. You can write like 'event project meeting /from Mon 2pm /to 4pm'");
-                        }
-                        String[] split = parts[1].split(" /from ");
-                        String status = split[0];
-                        String[] split2 = split[1].split(" /to ");
-                        String from = split2[0];
-                        String to = split2[1];
-
-                        LocalDate fromDate = LocalDate.parse(from);
-                        LocalDate toDate = LocalDate.parse(to);
-
-                        tasks[num] = new Event(status, fromDate, toDate);
-                        num++;
-                        storage.save(tasks, num);
-
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println("  " + tasks[num - 1].toString());
-                        System.out.println("Now you have " + num + " tasks in the list.");
-                        System.out.println("------------------------------------------------------------");
-                        break;
-                    }
-
-                    case "delete" :{
-                        if (parts.length < 2) {
-                            throw new LarsException("Please specify which task to mark.");
-                        }
-
-                        int index = Integer.parseInt(parts[1]) - 1;
-                        if (index < 0 || index >= num) {
-                            throw new LarsException("Invalid task number!");
-                        }
-                        System.out.println("Noted. I've removed this task:");
-                        System.out.println("    " + tasks[index]);
-                        for (int i = index; i < num -1; i++) {
-                            tasks[i] = tasks[i + 1];
-                        }
-                        num--;
-                        storage.save(tasks, num);
-                        System.out.println("Now you have " + num + " tasks in the list.");
-                        System.out.println("------------------------------------------------------------");
-                        break;
-                    }
-                    default:
-                        throw new LarsException("I'm sorry, but I don't know what that means :-(");
-                }
+                isExit = Parser.parse(storage, tasks, ui);
             } catch (LarsException e) {
-                System.out.println("OOPS!!! " + e.getMessage());
-                System.out.println("------------------------------------------------------------");
+                ui.readError(e.getMessage());
+            } catch (Exception e) {
+                ui.readError("An unexpected error occurred: " + e.getMessage());
             }
         }
+
+    }
+
+    public static void main(String[] args) {
+        new Lars("./data").run();
     }
 }

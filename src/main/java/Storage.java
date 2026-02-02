@@ -1,3 +1,4 @@
+import Exceptions.LarsException;
 import task.Task;
 
 import java.io.File;
@@ -36,10 +37,11 @@ public class Storage {
         }
     }
 
-    public int readTasks(Task[] tasks) throws LarsException {
+    public Task[] load() throws LarsException {
         int count = 0;
+        Task[] tasks = new Task[100];
         if (!taskStorageFile.exists()) {
-            return 0;
+            return tasks;
         }
         try (Scanner s = new Scanner(this.taskStorageFile)) {
             while (s.hasNext()) {
@@ -52,7 +54,7 @@ public class Storage {
                 boolean isDone = parts[1].equals("1");
                 String description = parts[2];
 
-                Task task;
+                Task task = null;
                 switch (type) {
                     case "T":
                         task = new task.Todo(description);
@@ -69,14 +71,16 @@ public class Storage {
                         throw new LarsException("Damaged archived data was discovered!");
                 }
 
-                if (isDone) {
-                    task.BeDone();
+                if (task != null) {
+                    if (isDone) {
+                        task.BeDone();
+                    }
+                    tasks[count++] = task;
                 }
-                tasks[count++] = task;
             }
         } catch (IOException e) {
             throw new LarsException("Failed to read the file: " + e.getMessage());
         }
-        return count;
+        return tasks;
     }
 }

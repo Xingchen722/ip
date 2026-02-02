@@ -43,8 +43,9 @@ public class Deadline extends Task {
 
     @Override
     public String toStorageString() {
-        if (by != null) {
-            return "D | " + super.toStorageString() + " | " + by ;
+        if (by != null ) {
+            String pattern = hasTime ? "MMM d yyyy HH:mm" : "MMM d yyyy";
+            return "D | " + super.toStorageString() + " | " + by.format(DateTimeFormatter.ofPattern(pattern));
         } else {
             return "D | " + super.toStorageString() + " | " + bySingle;
         }
