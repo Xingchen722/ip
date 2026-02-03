@@ -1,5 +1,7 @@
 package lars.task;
-
+/**
+ * Represents a generic task with a description and completion status.
+ */
 public class Task {
     protected String task;
     protected boolean status;
@@ -9,10 +11,16 @@ public class Task {
         this.status = false;
     }
 
+    /**
+     * Marks the task as completed.
+     */
     public void BeDone() {
         this.status = true;
     }
 
+    /**
+     * Marks the task as not completed.
+     */
     public void NotDone() {
         this.status = false;
     }
@@ -34,6 +42,10 @@ public class Task {
         return "[" + WriteStatus() + "] " + getTask();
     }
 
+    /**
+     * Returns a string representation used for saving the task to a file.
+     * @return A formatted string containing status and description.
+     */
     public String toStorageString() {
         return (status ? "1" : "0") + " | " + task;
     }

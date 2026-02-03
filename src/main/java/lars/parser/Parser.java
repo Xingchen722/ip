@@ -11,7 +11,18 @@ import lars.task.Todo;
 
 import java.time.LocalDate;
 
+/**
+ * Handles the interpretation of user input and executes task-related logic.
+ */
 public class Parser {
+    /**
+     * Parses the user command and interacts with the storage and task list.
+     * * @param storage The storage handler for saving/loading data.
+     * @param tasks   The current list of tasks to be modified.
+     * @param ui      The user interface for displaying feedback.
+     * @return true if the "bye" command is received, false otherwise.
+     * @throws LarsException If the command is invalid or parameters are missing.
+     */
     public static boolean parse(Storage storage, TaskList tasks, Ui ui) throws LarsException {
         String input = ui.readCommand();
         String[] parts = input.split(" ", 2);

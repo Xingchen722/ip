@@ -11,6 +11,9 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Handles loading tasks from and saving tasks to a local file.
+ */
 public class Storage {
     private final String filePath;
     private final File taskStorageFile;
@@ -20,6 +23,12 @@ public class Storage {
         this.taskStorageFile = new File(filePath + "/lars.txt");
     }
 
+    /**
+     * Saves the provided task array into a text file.
+     * @param tasks The array of tasks to save.
+     * @param num   The number of valid tasks in the array.
+     * @throws LarsException If an I/O error occurs during file creation or writing.
+     */
     public void save(Task[] tasks, int num) throws LarsException {
         try {
             Files.createDirectories(Path.of(this.filePath));
@@ -39,6 +48,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads task data from the storage file and reconstructs Task objects.
+     * @return An array of Task objects loaded from the file.
+     * @throws LarsException If the file is corrupted or cannot be read.
+     */
     public Task[] load() throws LarsException {
         int count = 0;
         Task[] tasks = new Task[100];

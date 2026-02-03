@@ -5,11 +5,23 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a task with a deadline.
+ * It supports parsing input dates in "y-M-d" format or date-times in "y-M-d HHmm" format.
+ */
 public class Deadline extends Task {
     private LocalDateTime by = null;
     private String bySingle;
     private boolean hasTime = false; // record if there is time
 
+    /**
+     * Constructs a Deadline task and attempts to parse the 'by' string.
+     * If the string matches "y-M-d HHmm", it is stored as a LocalDateTime with time.
+     * If it matches "y-M-d", it is stored as the start of that day.
+     * Otherwise, it is stored as a raw string.
+     * * @param status   The description of the task.
+     * @param byString The deadline date/time string provided by the user.
+     */
     public Deadline(String status, String byString) {
         super(status);
         this.bySingle = byString;
@@ -31,6 +43,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns a string representation of the Deadline task for display.
+     * If the date was successfully parsed, it formats it as "MMM d yyyy" (plus time if provided).
+     * @return A formatted string showing the task type, status, description, and deadline.
+     */
     @Override
     public String toString() {
         if (by != null) {
@@ -41,6 +58,10 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns a string representation of the Deadline task formatted for file storage.
+     * @return A string in the format "D | status | description | formatted_date".
+     */
     @Override
     public String toStorageString() {
         if (by != null ) {

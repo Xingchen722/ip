@@ -5,6 +5,9 @@ import java.util.Scanner;
 import lars.task.TaskList;
 import lars.task.Task;
 
+/**
+ * Handles all user interface interactions, including input reading and message printing.
+ */
 public class Ui {
     private Scanner scanner;
 
@@ -16,6 +19,9 @@ public class Ui {
         System.out.println("------------------------------------------------------------");
     }
 
+    /**
+     * welcome to string.
+     */
     public void welcome() {
         Line();
         System.out.println("Hello! I'm lars.Lars");
@@ -23,10 +29,18 @@ public class Ui {
         Line();
     }
 
+    /**
+     * Reads the next line of text entered by the user.
+     * @return The full command string.
+     */
     public String readCommand() {
         return scanner.nextLine();
     }
 
+    /**
+     * Displays an error message to the user.
+     * @param msg The error detail to be printed.
+     */
     public void readError(String msg) {
         System.out.println("OOPS!!! " + msg);
         Line();
@@ -64,6 +78,10 @@ public class Ui {
         Line();
     }
 
+    /**
+     * Lists all current tasks to the console in a numbered format.
+     * @param tasks The TaskList containing tasks to show.
+     */
     public void showTaskList(TaskList tasks) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.getSize(); i++) {
