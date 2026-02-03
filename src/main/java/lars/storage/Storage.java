@@ -1,4 +1,4 @@
-package lars;
+package lars.storage;
 
 import lars.Exceptions.LarsException;
 import lars.task.Task;

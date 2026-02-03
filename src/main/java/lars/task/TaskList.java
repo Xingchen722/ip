@@ -1,6 +1,4 @@
-package lars;
-
-import lars.task.Task;
+package lars.task;
 
 public class TaskList {
     private Task[] tasks;

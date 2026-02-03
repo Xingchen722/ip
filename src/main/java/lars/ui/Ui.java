@@ -1,7 +1,8 @@
-package lars;
+package lars.ui;
 
 import java.util.Scanner;
 
+import lars.task.TaskList;
 import lars.task.Task;
 
 public class Ui {
