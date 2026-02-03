@@ -1,4 +1,4 @@
-package task;
+package lars.task;
 
 public class Todo extends Task {
     public Todo(String status) {

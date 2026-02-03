@@ -1,8 +1,10 @@
-import Exceptions.LarsException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+package lars;
+
+import lars.Exceptions.LarsException;
+import lars.task.Deadline;
+import lars.task.Event;
+import lars.task.Task;
+import lars.task.Todo;
 
 import java.time.LocalDate;
 
@@ -13,27 +15,27 @@ public class Parser {
         String command = parts[0];
         switch (command) {
             case "bye":
-                ui.showBye(); //Ui
+                ui.showBye(); //lars.Ui
                 return true;
             case "list":
-                ui.showTaskList(tasks); //Ui
+                ui.showTaskList(tasks); //lars.Ui
                 break;
             case "mark":
                 if (parts.length < 2) {
-                    throw new LarsException("Please specify which task to mark.");
+                    throw new LarsException("Please specify which lars.task to mark.");
                 }
                 int index = Integer.parseInt(parts[1]) - 1;
                 if (tasks.getTask(index).getStatus()) {
-                    ui.showTaskHasMarked(); //Ui
+                    ui.showTaskHasMarked(); //lars.Ui
                     break;
                 }
                 tasks.getTask(index).BeDone();
                 storage.save(tasks.getAllTasks(), tasks.getSize());;
-                ui.showTaskMarked(tasks.getTask(index)); //Ui
+                ui.showTaskMarked(tasks.getTask(index)); //lars.Ui
                 break;
             case "unmark":
                 if (parts.length < 2) {
-                    throw new LarsException("Please specify which task to mark.");
+                    throw new LarsException("Please specify which lars.task to mark.");
                 }
                 int index2 = Integer.parseInt(parts[1]) - 1;
                 if (!tasks.getTask(index2).getStatus()) {
@@ -85,15 +87,15 @@ public class Parser {
                 break;
             case "delete":
                 if (parts.length < 2) {
-                    throw new LarsException("Please specify which task to mark.");
+                    throw new LarsException("Please specify which lars.task to mark.");
                 }
                 int index1 = Integer.parseInt(parts[1]) - 1;
                 if (index1 < 0 || index1 >= tasks.getSize()) {
-                    throw new LarsException("Invalid task number!");
+                    throw new LarsException("Invalid lars.task number!");
                 }
                 Task removed = tasks.deleteTask(index1);
-                storage.save(tasks.getAllTasks(), tasks.getSize()); //Storage
-                ui.showTaskDeleted(removed, tasks.getSize()); //Ui
+                storage.save(tasks.getAllTasks(), tasks.getSize()); //lars.Storage
+                ui.showTaskDeleted(removed, tasks.getSize()); //lars.Ui
                 break;
             default:
                 throw new LarsException("I'm sorry, but I don't know what that means :-(");

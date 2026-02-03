@@ -1,5 +1,7 @@
-import Exceptions.LarsException;
-import task.Task;
+package lars;
+
+import lars.Exceptions.LarsException;
+import lars.task.Task;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -57,15 +59,15 @@ public class Storage {
                 Task task = null;
                 switch (type) {
                     case "T":
-                        task = new task.Todo(description);
+                        task = new lars.task.Todo(description);
                         break;
                     case "D":
-                        task = new task.Deadline(description, parts[3]);
+                        task = new lars.task.Deadline(description, parts[3]);
                         break;
                     case "E":
                         LocalDate fromDate = LocalDate.parse(parts[3]);
                         LocalDate toDate = LocalDate.parse(parts[4]);
-                        task = new task.Event(description, fromDate, toDate);
+                        task = new lars.task.Event(description, fromDate, toDate);
                         break;
                     default:
                         throw new LarsException("Damaged archived data was discovered!");

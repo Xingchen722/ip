@@ -1,8 +1,8 @@
+package lars;
+
 import java.util.Scanner;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+
+import lars.task.Task;
 
 public class Ui {
     private Scanner scanner;
@@ -17,7 +17,7 @@ public class Ui {
 
     public void welcome() {
         Line();
-        System.out.println("Hello! I'm Lars");
+        System.out.println("Hello! I'm lars.Lars");
         System.out.println("What can I do for you?");
         Line();
     }
@@ -32,7 +32,7 @@ public class Ui {
     }
 
     public void showTaskDeleted(Task t, int size) {
-        System.out.println("Noted. I've removed this task:\n    " + t);
+        System.out.println("Noted. I've removed this lars.task:\n    " + t);
         System.out.println("Now you have " + size + " tasks in the list.");
         Line();
     }
@@ -43,22 +43,22 @@ public class Ui {
     }
 
     public void showTaskHasMarked() {
-        System.out.println("You have marked this task");
+        System.out.println("You have marked this lars.task");
         Line();
     }
     public void showTaskMarked(Task t) {
-        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("Nice! I've marked this lars.task as done:");
         System.out.println("    " + t);
         Line();
     }
 
     public void showTaskHasUnmarked() {
-        System.out.println("You have unmarked this task");
+        System.out.println("You have unmarked this lars.task");
         Line();
     }
 
     public void showTaskUnmarked(Task t) {
-        System.out.println("OK, I've marked this task as not done yet:");
+        System.out.println("OK, I've marked this lars.task as not done yet:");
         System.out.println("    " + t);
         Line();
     }
@@ -72,7 +72,7 @@ public class Ui {
     }
 
     public void showTaskAdd(Task task, int num) {
-        System.out.println("Got it. I've added this task:");
+        System.out.println("Got it. I've added this lars.task:");
         System.out.println("    " + task);
         System.out.println("Now you have " + num + " tasks in the list.");
         Line();

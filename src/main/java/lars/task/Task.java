@@ -1,4 +1,4 @@
-package task;
+package lars.task;
 
 public class Task {
     protected String task;

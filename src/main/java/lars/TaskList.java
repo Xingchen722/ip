@@ -1,7 +1,7 @@
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+package lars;
+
+import lars.task.Task;
+
 public class TaskList {
     private Task[] tasks;
     private int num;

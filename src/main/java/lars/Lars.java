@@ -1,4 +1,6 @@
-import Exceptions.LarsException;
+package lars;
+
+import lars.Exceptions.LarsException;
 
 public class Lars {
     private Storage storage;
