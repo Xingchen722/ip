@@ -3,7 +3,6 @@ package lars;
 import lars.Exceptions.LarsException;
 import lars.parser.Parser;
 import lars.storage.Storage;
-import lars.task.Task;
 import lars.task.TaskList;
 import lars.ui.Ui;
 import org.junit.jupiter.api.Test;
