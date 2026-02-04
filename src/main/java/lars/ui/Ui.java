@@ -61,6 +61,7 @@ public class Ui {
         System.out.println("You have marked this lars.task");
         Line();
     }
+
     public void showTaskMarked(Task t) {
         System.out.println("Nice! I've marked this lars.task as done:");
         System.out.println("    " + t);

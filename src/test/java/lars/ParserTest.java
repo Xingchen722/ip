@@ -6,7 +6,6 @@ import lars.storage.Storage;
 import lars.task.TaskList;
 import lars.ui.Ui;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

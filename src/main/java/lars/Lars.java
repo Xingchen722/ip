@@ -43,7 +43,6 @@ public class Lars {
                 ui.readError("An unexpected error occurred: " + e.getMessage());
             }
         }
-
     }
 
     /**
