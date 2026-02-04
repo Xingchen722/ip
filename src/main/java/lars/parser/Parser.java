@@ -44,7 +44,7 @@ public class Parser {
                 ui.showTaskHasMarked(); // lars.ui.Ui
                 break;
             }
-            tasks.getTask(index).BeDone();
+            tasks.getTask(index).BeDone(); // change status
             storage.save(tasks.getAllTasks(), tasks.getSize());
             ui.showTaskMarked(tasks.getTask(index)); // lars.ui.Ui
             break;
