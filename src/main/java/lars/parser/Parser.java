@@ -30,10 +30,10 @@ public class Parser {
         String command = parts[0];
         switch (command) {
         case "bye":
-            ui.showBye(); //lars.ui.Ui
+            ui.showBye(); // lars.ui.Ui
             return true;
         case "list":
-            ui.showTaskList(tasks); //lars.ui.Ui
+            ui.showTaskList(tasks); // lars.ui.Ui
             break;
         case "mark":
             if (parts.length < 2) {
@@ -41,12 +41,12 @@ public class Parser {
             }
             int index = Integer.parseInt(parts[1]) - 1;
             if (tasks.getTask(index).getStatus()) {
-                ui.showTaskHasMarked(); //lars.ui.Ui
+                ui.showTaskHasMarked(); // lars.ui.Ui
                 break;
             }
             tasks.getTask(index).BeDone();
             storage.save(tasks.getAllTasks(), tasks.getSize());
-            ui.showTaskMarked(tasks.getTask(index)); //lars.ui.Ui
+            ui.showTaskMarked(tasks.getTask(index)); // lars.ui.Ui
             break;
         case "unmark":
             if (parts.length < 2) {
@@ -109,8 +109,8 @@ public class Parser {
                 throw new LarsException("Invalid lars.task number!");
             }
             Task removed = tasks.deleteTask(index1);
-            storage.save(tasks.getAllTasks(), tasks.getSize()); //lars.storage.Storage
-            ui.showTaskDeleted(removed, tasks.getSize()); //lars.ui.Ui
+            storage.save(tasks.getAllTasks(), tasks.getSize()); // lars.storage.Storage
+            ui.showTaskDeleted(removed, tasks.getSize()); // lars.ui.Ui
             break;
         default:
             throw new LarsException("I'm sorry, but I don't know what that means :-(");
