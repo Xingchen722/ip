@@ -23,7 +23,6 @@ public class Lars {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            //storage.load()用来得到数组
             tasks = new TaskList(storage.load());
         } catch (LarsException e) {
             ui.readError("Failed to load tasks." + e.getMessage());
