@@ -54,12 +54,17 @@ public class TaskList {
     }
 
     /** @return The number of tasks currently in the list. */
-    public int getSize() { return num; }
+    public int getSize() {
+        return num;
+    }
 
     /** @return The Task at the specified index. */
-    public Task getTask(int index) { return tasks[index]; }
+    public Task getTask(int index) {
+        return tasks[index];
+    }
 
     /** @return All Task[]. */
-    public Task[] getAllTasks() { return tasks; }
-
+    public Task[] getAllTasks() {
+        return tasks;
+    }
 }
