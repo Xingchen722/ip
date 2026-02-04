@@ -8,7 +8,6 @@ import lars.task.Deadline;
 import lars.task.Event;
 import lars.task.Task;
 import lars.task.Todo;
-
 import java.time.LocalDate;
 
 /**
