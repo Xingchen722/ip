@@ -67,4 +67,14 @@ public class TaskList {
     public Task[] getAllTasks() {
         return tasks;
     }
+
+    public TaskList findTasks(String s) {
+        TaskList matchingTasks = new TaskList();
+        for (int i = 0; i < num; i++) {
+            if (tasks[i].getTask().contains(s)) {
+                matchingTasks.addTask(tasks[i]);
+            }
+        }
+        return matchingTasks;
+    }
 }

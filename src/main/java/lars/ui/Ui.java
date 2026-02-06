@@ -1,5 +1,6 @@
 package lars.ui;
 
+import java.util.List;
 import java.util.Scanner;
 
 import lars.task.TaskList;
@@ -95,6 +96,14 @@ public class Ui {
         System.out.println("Got it. I've added this lars.task:");
         System.out.println("    " + task);
         System.out.println("Now you have " + num + " tasks in the list.");
+        Line();
+    }
+
+    public void showFindingTasks(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.getSize(); i++) {
+            System.out.println("    " + (i + 1) + ". " + tasks.getTask(i));
+        }
         Line();
     }
 }

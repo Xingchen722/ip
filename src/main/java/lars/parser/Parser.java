@@ -111,6 +111,13 @@ public class Parser {
             storage.save(tasks.getAllTasks(), tasks.getSize()); // lars.storage.Storage
             ui.showTaskDeleted(removed, tasks.getSize()); // lars.ui.Ui
             break;
+        case "find":
+            if (parts.length < 2) {
+                throw new LarsException("Please specify what you want to find.");
+            }
+//            storage.save(tasks.findTasks(parts[1]).getAllTasks(), tasks.getSize());
+            ui.showFindingTasks(tasks.findTasks(parts[1]));
+            break;
         default:
             throw new LarsException("I'm sorry, but I don't know what that means :-(");
         }
