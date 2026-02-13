@@ -35,6 +35,7 @@ public class Storage {
             if (!taskStorageFile.exists()) {
                 taskStorageFile.createNewFile();
             }
+
         } catch (IOException e) {
             throw new LarsException("The storage file cannot be created: " + e.getMessage());
         }
