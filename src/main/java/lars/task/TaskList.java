@@ -46,6 +46,7 @@ public class TaskList {
      * @return The removed Task object.
      */
     public Task deleteTask(int index) {
+        assert index >= 0 && index < num: "Index out of bounds: " + index;
         Task t = tasks[index];
         for (int i = index; i < num -1; i++) {
             tasks[i] = tasks[i + 1];
@@ -62,6 +63,7 @@ public class TaskList {
 
     /** @return The Task at the specified index. */
     public Task getTask(int index) {
+        assert index >= 0 && index < num: "Index out of bounds: " + index;
         return tasks[index];
     }
 

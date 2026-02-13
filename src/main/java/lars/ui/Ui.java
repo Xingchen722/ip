@@ -85,21 +85,24 @@ public class Ui {
      * Lists all current tasks to the console in a numbered format.
      * @param tasks The TaskList containing tasks to show.
      */
+    // change from for loop to stream
     public void showTaskList(TaskList tasks) {
+        assert tasks != null : "Task cannot be null";
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println("    " + (i + 1) + ". " + tasks.getTask(i));
-        }
+        IntStream.range(0, tasks.getSize())
+                .forEach(i -> System.out.println("    " + (i + 1) + ". " + tasks.getTask(i)));
         Line();
     }
 
     public void showTaskAdd(Task task, int num) {
+        assert task != null : "Task cannot be null";
         System.out.println("Got it. I've added this lars.task:");
         System.out.println("    " + task);
         System.out.println("Now you have " + num + " tasks in the list.");
         Line();
     }
 
+    // change from for loop to stream
     public void showFindingTasks(TaskList tasks) {
         System.out.println("Here are the matching tasks in your list:");
         IntStream.range(0, tasks.getSize())
