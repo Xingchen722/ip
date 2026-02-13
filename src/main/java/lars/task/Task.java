@@ -15,18 +15,18 @@ public class Task {
     /**
      * Marks the task as completed.
      */
-    public void BeDone() {
+    public void markDone() {
         this.status = true;
     }
 
     /**
      * Marks the task as not completed.
      */
-    public void NotDone() {
+    public void markNotDone() {
         this.status = false;
     }
 
-    public String WriteStatus() {
+    public String writeStatus() {
         return status ? "X" : " ";
     }
 
@@ -40,7 +40,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + WriteStatus() + "] " + getTask();
+        return "[" + writeStatus() + "] " + getTask();
     }
 
     /**

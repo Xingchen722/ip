@@ -86,10 +86,9 @@ public class Storage {
                 default:
                     throw new LarsException("Damaged archived data was discovered!");
                 }
-
                 if (task != null) {
                     if (isDone) {
-                        task.BeDone();
+                        task.markDone();
                     }
                     tasks[count++] = task;
                 }
