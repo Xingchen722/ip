@@ -2,6 +2,7 @@ package lars.ui;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 import lars.task.TaskList;
 import lars.task.Task;
@@ -101,9 +102,8 @@ public class Ui {
 
     public void showFindingTasks(TaskList tasks) {
         System.out.println("Here are the matching tasks in your list:");
-        for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println("    " + (i + 1) + ". " + tasks.getTask(i));
-        }
+        IntStream.range(0, tasks.getSize())
+                .forEach(i -> System.out.println("    " + (i + 1) + ". " + tasks.getTask(i)));
         Line();
     }
 }

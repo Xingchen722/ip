@@ -1,5 +1,7 @@
 package lars.task;
 
+import java.util.Arrays;
+
 /**
  * Represents a collection of tasks with operations to add, delete, and retrieve tasks.
  */
@@ -68,13 +70,13 @@ public class TaskList {
         return tasks;
     }
 
+    // change to stream from for loop
     public TaskList findTasks(String s) {
-        TaskList matchingTasks = new TaskList();
-        for (int i = 0; i < num; i++) {
-            if (tasks[i].getTask().contains(s)) {
-                matchingTasks.addTask(tasks[i]);
-            }
-        }
-        return matchingTasks;
+        assert s != null : "Task list should not be null";
+        return new TaskList(
+                Arrays.stream(tasks, 0, num)
+                        .filter(t -> t != null && t.getTask().contains(s))
+                        .toArray(Task[]::new)
+        );
     }
 }
