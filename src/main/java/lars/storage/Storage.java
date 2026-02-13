@@ -62,9 +62,11 @@ public class Storage {
         try (Scanner s = new Scanner(this.taskStorageFile)) {
             while (s.hasNext()) {
                 String line = s.nextLine();
+
                 if (line.trim().isEmpty()) {
                     continue;
                 }
+
                 String[] parts = line.split(" \\| ");
                 String type = parts[0];
                 boolean isDone = parts[1].equals("1");
