@@ -15,14 +15,14 @@ public class Task {
     /**
      * Marks the task as completed.
      */
-    public void BeDone() {
+    public void markDone() {
         this.status = true;
     }
 
     /**
      * Marks the task as not completed.
      */
-    public void NotDone() {
+    public void markNotDone() {
         this.status = false;
     }
 
