@@ -1,6 +1,6 @@
 package lars.parser;
 
-import lars.Exceptions.LarsException;
+import lars.exceptions.LarsException;
 import lars.storage.Storage;
 import lars.ui.Ui;
 import lars.task.TaskList;

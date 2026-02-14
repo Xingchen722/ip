@@ -22,7 +22,9 @@ public class Ui {
     }
 
     /**
-     * welcome to string.
+     * Returns the welcome message shown to the user.
+     *
+     * @return the welcome message string
      */
     public void welcome() {
         Line();

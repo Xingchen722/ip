@@ -1,6 +1,6 @@
 package lars;
 
-import lars.Exceptions.LarsException;
+import lars.exceptions.LarsException;
 import lars.storage.Storage;
 import lars.task.Task;
 import lars.task.Todo;

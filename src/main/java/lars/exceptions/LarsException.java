@@ -1,4 +1,4 @@
-package lars.Exceptions;
+package lars.exceptions;
 
 public class LarsException extends Exception {
     public LarsException(String message) {

@@ -1,6 +1,6 @@
 package lars.storage;
 
-import lars.Exceptions.LarsException;
+import lars.exceptions.LarsException;
 import lars.task.Task;
 
 import java.io.File;
