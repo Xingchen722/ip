@@ -1,22 +1,25 @@
 package lars.parser;
 
+import java.time.LocalDate;
+
 import lars.exceptions.LarsException;
 import lars.storage.Storage;
-import lars.ui.Ui;
-import lars.task.TaskList;
 import lars.task.Deadline;
 import lars.task.Event;
 import lars.task.Task;
+import lars.task.TaskList;
 import lars.task.Todo;
-import java.time.LocalDate;
+import lars.ui.Ui;
+
 
 /**
  * Handles the interpretation of user input and executes task-related logic.
  */
 public class Parser {
+
     /**
      * Parses the user command and interacts with the storage and task list.
-     * * @param storage The storage handler for saving/loading data.
+     * @param storage The storage handler for saving/loading data.
      *
      * @param tasks The current list of tasks to be modified.
      * @param ui    The user interface for displaying feedback.
@@ -27,6 +30,15 @@ public class Parser {
     private static final String FROM_DELIMITER = " /from ";
     private static final String TO_DELIMITER = " /to ";
 
+    /**
+     * Parses the user command and interacts with the storage and task list.
+     *
+     * @param storage The storage handler for saving/loading data.
+     * @param tasks   The current list of tasks to be modified.
+     * @param ui      The user interface for displaying feedback.
+     * @return true if the "bye" command is received, false otherwise.
+     * @throws LarsException If the command is invalid or parameters are missing.
+     */
     public static boolean parse(Storage storage, TaskList tasks, Ui ui) throws LarsException {
         String input = ui.readCommand();
         String[] parts = input.split(" ", 2);
@@ -66,7 +78,16 @@ public class Parser {
         return false;
     }
 
-    public static void handleMark(String[] parts, TaskList tasks, Storage storage, Ui ui) throws LarsException{
+    /**
+     * Marks the specified task as done.
+     *
+     * @param parts   The input split into command and argument.
+     * @param tasks   The current task list.
+     * @param storage The storage handler to save changes.
+     * @param ui      The user interface to display feedback.
+     * @throws LarsException If no task index is provided.
+     */
+    public static void handleMark(String[] parts, TaskList tasks, Storage storage, Ui ui) throws LarsException {
         if (parts.length < 2) {
             throw new LarsException("Please specify which lars.task to mark.");
         }
@@ -79,6 +100,15 @@ public class Parser {
         ui.showTaskMarked(tasks.getTask(index));
     }
 
+    /**
+     * Marks the specified task as not done.
+     *
+     * @param parts   The input split into command and argument.
+     * @param tasks   The current task list.
+     * @param storage The storage handler to save changes.
+     * @param ui      The user interface to display feedback.
+     * @throws LarsException If no task index is provided.
+     */
     public static void handleUnMark(String[] parts, TaskList tasks, Storage storage, Ui ui) throws LarsException {
         if (parts.length < 2) {
             throw new LarsException("Please specify which lars.task to mark.");
@@ -92,7 +122,16 @@ public class Parser {
         ui.showTaskUnmarked(tasks.getTask(index2));
     }
 
-    public static void handleTodo(String[] parts, TaskList tasks, Storage storage, Ui ui) throws LarsException{
+    /**
+     * Adds a new Todo task to the task list.
+     *
+     * @param parts   The input split into command and argument.
+     * @param tasks   The current task list.
+     * @param storage The storage handler to save changes.
+     * @param ui      The user interface to display feedback.
+     * @throws LarsException If the description is empty.
+     */
+    public static void handleTodo(String[] parts, TaskList tasks, Storage storage, Ui ui) throws LarsException {
         if (parts.length < 2) {
             throw new LarsException("The description of a todo cannot be empty.");
         }
@@ -102,9 +141,19 @@ public class Parser {
         ui.showTaskAdd(ti, tasks.getSize());
     }
 
+    /**
+     * Adds a new Deadline task to the task list.
+     *
+     * @param parts   The input split into command and argument.
+     * @param tasks   The current task list.
+     * @param storage The storage handler to save changes.
+     * @param ui      The user interface to display feedback.
+     * @throws LarsException If the description or /by date is missing.
+     */
     public static void handleDdl(String[] parts, TaskList tasks, Storage storage, Ui ui) throws LarsException {
         if (parts.length < 2) {
-            throw new LarsException("The description of a deadline cannot be empty. You can write like 'deadline return book /by Sunday'");
+            throw new LarsException("The description of a deadline cannot be empty. "
+                    + "You can write like 'deadline return book /by Sunday'");
         }
         String[] split = parts[1].split(" /by ");
         String status = split[0];
@@ -115,9 +164,19 @@ public class Parser {
         ui.showTaskAdd(d, tasks.getSize());
     }
 
+    /**
+     * Adds a new Event task to the task list.
+     *
+     * @param parts   The input split into command and argument.
+     * @param tasks   The current task list.
+     * @param storage The storage handler to save changes.
+     * @param ui      The user interface to display feedback.
+     * @throws LarsException If the description or /from /to times are missing.
+     */
     public static void handleEvent(String[] parts, TaskList tasks, Storage storage, Ui ui) throws LarsException {
         if (parts.length < 2) {
-            throw new LarsException("The description of a event cannot be empty. You can write like 'event project meeting /from Mon 2pm /to 4pm'");
+            throw new LarsException("The description of a event cannot be empty. "
+                    + "You can write like 'event project meeting /from Mon 2pm /to 4pm'");
         }
         String[] split1 = parts[1].split(" /from ");
         String status1 = split1[0];
@@ -134,6 +193,15 @@ public class Parser {
         ui.showTaskAdd(e, tasks.getSize());
     }
 
+    /**
+     * Deletes a task from the task list.
+     *
+     * @param parts   The input split into command and argument.
+     * @param tasks   The current task list.
+     * @param storage The storage handler to save changes.
+     * @param ui      The user interface to display feedback.
+     * @throws LarsException If no task index is provided or index is invalid.
+     */
     public static void handleDelete(String[] parts, TaskList tasks, Storage storage, Ui ui) throws LarsException {
         if (parts.length < 2) {
             throw new LarsException("Please specify which lars.task to mark.");
@@ -147,6 +215,15 @@ public class Parser {
         ui.showTaskDeleted(removed, tasks.getSize()); // lars.ui.Ui
     }
 
+    /**
+     * Finds tasks in the task list containing the keyword.
+     *
+     * @param parts   The input split into command and argument.
+     * @param tasks   The current task list.
+     * @param storage The storage handler (not used here but kept for consistency).
+     * @param ui      The user interface to display feedback.
+     * @throws LarsException If no keyword is provided.
+     */
     public static void handleFind(String[] parts, TaskList tasks, Storage storage, Ui ui) throws LarsException {
         if (parts.length < 2) {
             throw new LarsException("Please specify what you want to find.");

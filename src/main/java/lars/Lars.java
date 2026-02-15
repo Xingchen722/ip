@@ -30,10 +30,15 @@ public class Lars {
         }
     }
 
+    /**
+     * Runs the main loop of the application.
+     * It repeatedly reads user input, parses commands, and executes them
+     * until the user exits the program.
+     */
     public void run() {
         ui.welcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 isExit = Parser.parse(storage, tasks, ui);
             } catch (LarsException e) {

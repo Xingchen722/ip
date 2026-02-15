@@ -7,6 +7,11 @@ public class Task {
     protected String task;
     protected boolean status;
 
+    /**
+     * Constructs a new {@code Task} with the specified description.
+     * The task is initialized with an incomplete status (status = false).
+     * @param task The description of the task.
+     */
     public Task(String task) {
         this.task = task;
         this.status = false;
