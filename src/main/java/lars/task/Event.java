@@ -47,4 +47,9 @@ public class Event extends Task {
     public String toStorageString() {
         return "E | " + super.toStorageString() + " | " + this.from + " | " + this.to;
     }
+
+    @Override
+    public LocalDate getDate() {
+        return this.to;
+    }
 }

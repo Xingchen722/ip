@@ -7,6 +7,7 @@ import lars.command.DeleteCommand;
 import lars.command.ExitCommand;
 import lars.command.ListCommand;
 import lars.command.MarkCommand;
+import lars.command.RemindCommand;
 import lars.exceptions.LarsException;
 import lars.task.Deadline;
 import lars.task.Event;
@@ -67,6 +68,9 @@ public class Parser {
 
         case "bye":
             return new ExitCommand();
+
+        case "remind":
+            return new RemindCommand();
         default:
             throw new LarsException("I'm sorry, but I don't know what that means :-(");
         }

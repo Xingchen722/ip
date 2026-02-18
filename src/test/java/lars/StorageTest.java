@@ -19,7 +19,8 @@ public class StorageTest {
 
     @Test
     public void storageSaveTest() throws LarsException {
-        Storage so = new Storage(tempDir.toString());
+        Path tempFile = tempDir.resolve("tasks.txt");
+        Storage so = new Storage(tempFile.toString());
 
         Task[] tasks = new Task[1];
         tasks[0] = new Todo("read book");

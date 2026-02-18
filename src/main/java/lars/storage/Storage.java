@@ -13,7 +13,6 @@ import lars.task.Task;
  * Handles loading tasks from and saving tasks to a local file.
  */
 public class Storage {
-    private static final String FILE_NAME = "lars.txt";
     private static final String STORAGE_DELIMITER = " \\| ";
     private static final String TODO_TYPE = "T";
     private static final String DEADLINE_TYPE = "D";
@@ -29,7 +28,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         assert filePath != null : "File path should not be null";
-        this.taskStorageFile = new File(filePath + FILE_NAME);
+        this.taskStorageFile = new File(filePath);
     }
 
     /**
@@ -48,14 +47,6 @@ public class Storage {
                 if (tasks[i] != null) {
                     fileWriter.write(tasks[i].toStorageString() + System.lineSeparator());
                 }
-            }
-        } catch (IOException e) {
-            throw new LarsException("Failed to write to the file: " + e.getMessage());
-        }
-
-        try (FileWriter fileWriter = new FileWriter(this.taskStorageFile)) {
-            for (int i = 0; i < num; i++) {
-                fileWriter.write(tasks[i].toStorageString() + System.lineSeparator());
             }
         } catch (IOException e) {
             throw new LarsException("Failed to write to the file: " + e.getMessage());

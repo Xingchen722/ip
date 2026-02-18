@@ -1,5 +1,7 @@
 package lars.task;
 
+import java.time.LocalDate;
+
 /**
  * Represents a generic task with a description and completion status.
  */
@@ -46,6 +48,10 @@ public class Task {
     @Override
     public String toString() {
         return "[" + writeStatus() + "] " + getTask();
+    }
+
+    public LocalDate getDate() {
+        return null;
     }
 
     /**

@@ -1,6 +1,6 @@
 todo borrow book
 deadline return library book /by 2026-02-15
-event project meeting /from 2026-02-10 /to 2026-02-10
+event project meeting /from 2026-02-10 /to 2026-02-20
 deadline return library book /by 2026-02-15 1800
 deadline return book /by Sunday
 todo 2103
