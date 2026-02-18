@@ -66,7 +66,6 @@ public class Parser {
             return new MarkCommand(Integer.parseInt(parts[1]) - 1, false);
 
         case "bye":
-            // You may need an ExitCommand class as well
             return new ExitCommand();
         default:
             throw new LarsException("I'm sorry, but I don't know what that means :-(");
