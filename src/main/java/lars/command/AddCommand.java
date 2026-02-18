@@ -18,6 +18,9 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws LarsException {
+        if (tasks.getSize() >= tasks.getAllTasks().length) {
+            throw new LarsException("Task list is full. Please delete some tasks first.");
+        }
         tasks.addTask(task);
         storage.save(tasks.getAllTasks(), tasks.getSize());
         this.response = "Got it. I've added this task:\n    " + task

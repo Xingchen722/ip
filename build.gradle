@@ -55,9 +55,17 @@ shadowJar {
     archiveBaseName = "Lars"
     archiveClassifier = null
     archiveFileName = 'lars.jar'
+
+    manifest {
+        attributes 'Main-Class': 'Launcher'
+    }
 }
 
 run{
     standardInput = System.in
+    jvmArgs = [
+            "--module-path", configurations.runtimeClasspath.asPath,
+            "--add-modules", "javafx.controls,javafx.fxml"
+    ]
 }
 

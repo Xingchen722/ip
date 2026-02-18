@@ -23,6 +23,9 @@ public class MarkCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws LarsException {
+        if (index < 0 || index >= tasks.getSize()) {
+            throw new LarsException("Invalid task number!");
+        }
         Task t = tasks.getTask(index);
         if (isMark) {
             t.markDone();

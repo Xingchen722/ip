@@ -27,7 +27,7 @@ public class Lars {
         try {
             tasks = new TaskList(storage.load());
         } catch (LarsException e) {
-            ui.readError("Failed to load tasks." + e.getMessage());
+            ui.readError("Failed to load tasks. " + e.getMessage());
             tasks = new TaskList();
         }
     }
@@ -39,6 +39,7 @@ public class Lars {
             commandType = c.getClass().getSimpleName();
             return c.getString();
         } catch (LarsException e) {
+            commandType = "Error";
             return "Error: " + e.getMessage();
         }
     }

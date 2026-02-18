@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import lars.exceptions.LarsException;
@@ -86,6 +87,9 @@ public class Storage {
                 if (line.trim().isEmpty()) {
                     continue;
                 }
+                if (count >= tasks.length) {
+                    throw new LarsException("Storage contains too many tasks (max 100).");
+                }
                 tasks[count++] = parseTaskFromStorage(line);
             }
         } catch (IOException e) {
@@ -96,8 +100,15 @@ public class Storage {
 
     private Task parseTaskFromStorage(String line) throws LarsException {
         String[] parts = line.split(STORAGE_DELIMITER);
+        if (parts.length < 3) {
+            throw new LarsException("Corrupted storage data: " + line);
+        }
         String type = parts[0];
-        boolean isDone = parts[1].equals("1");
+        String doneFlag = parts[1];
+        if (!doneFlag.equals("0") && !doneFlag.equals("1")) {
+            throw new LarsException("Corrupted storage data: " + line);
+        }
+        boolean isDone = doneFlag.equals("1");
         String description = parts[2];
 
         Task task;
@@ -106,11 +117,23 @@ public class Storage {
             task = new lars.task.Todo(description);
             break;
         case DEADLINE_TYPE:
+            if (parts.length < 4 || parts[3].trim().isEmpty()) {
+                throw new LarsException("Corrupted deadline data: " + line);
+            }
             task = new lars.task.Deadline(description, parts[3]);
             break;
         case EVENT_TYPE:
-            LocalDate fromDate = LocalDate.parse(parts[3]);
-            LocalDate toDate = LocalDate.parse(parts[4]);
+            if (parts.length < 5 || parts[3].trim().isEmpty() || parts[4].trim().isEmpty()) {
+                throw new LarsException("Corrupted event data: " + line);
+            }
+            LocalDate fromDate;
+            LocalDate toDate;
+            try {
+                fromDate = LocalDate.parse(parts[3]);
+                toDate = LocalDate.parse(parts[4]);
+            } catch (DateTimeParseException e) {
+                throw new LarsException("Corrupted event date format: " + line);
+            }
             task = new lars.task.Event(description, fromDate, toDate);
             break;
         default:
