@@ -66,11 +66,19 @@ public class Deadline extends Task {
     @Override
     public String toStorageString() {
         if (by != null) {
-            String pattern = hasTime ? "MMM d yyyy HH:mm" : "MMM d yyyy";
+            String pattern = hasTime ? "yyyy-MM-dd HHmm" : "yyyy-MM-dd";
             return "D | " + super.toStorageString() + " | "
-                    + by.format(DateTimeFormatter.ofPattern(pattern, java.util.Locale.ENGLISH));
+                    + by.format(DateTimeFormatter.ofPattern(pattern));
         } else {
             return "D | " + super.toStorageString() + " | " + bySingle;
         }
+    }
+
+    @Override
+    public LocalDate getDate() {
+        if (this.by == null) {
+            return null;
+        }
+        return this.by.toLocalDate();
     }
 }

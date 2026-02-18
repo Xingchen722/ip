@@ -1,4 +1,13 @@
-D | 0 | return library book | 2月 15 2026 18:00
+D | 0 | return library book | Feb 15 2026
+T | 0 | borrow book
+E | 0 | project meeting | 2026-02-10 | 2026-02-20
+D | 0 | return library book | Feb 15 2026 18:00
+D | 0 | return book | Sunday
+D | 0 | return 2103 | Feb 15 2026 18:00
+D | 0 | return library book | 2026-02-15
+E | 0 | project meeting | 2026-02-10 | 2026-02-20
+D | 0 | return library book | 2026-02-15 1800
 D | 0 | return book | Sunday
 T | 0 | 2103
-E | 0 | project meeting | 2026-02-10 | 2026-02-10
+D | 0 | return li book | 2026-02-19
+T | 0 | miss mjr

@@ -62,5 +62,13 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getLarsDialog(welcomeText, larsImage, "Welcome")
         );
     }
+
+    @FXML
+    private void handleRemind() {
+        String response = lars.getResponse("remind");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getLarsDialog(response, larsImage, "reminder")
+        );
+    }
 }
 

@@ -1,5 +1,6 @@
 package lars.task;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 
 /**
@@ -84,5 +85,66 @@ public class TaskList {
                         .filter(t -> t != null && t.getTask().contains(s))
                         .toArray(Task[]::new)
         );
+    }
+
+    /**
+     * Generates a reminder string listing all overdue and upcoming tasks.
+     *
+     * <p>Overdue tasks are those with a date before today.
+     * Upcoming tasks are those due within the next 3 days (including today).</p>
+     *
+     * <p>Completed tasks (marked done) are ignored.</p>
+     *
+     * <p>The returned string is formatted as follows:</p>
+     * <ul>
+     *   <li>If no tasks are due, returns a friendly message: "Hi, there is no tasks due recently 👏"</li>
+     *   <li>If there are overdue tasks, they are listed under "🚨 Urgent (Overdue):"</li>
+     *   <li>If there are upcoming tasks, they are listed under "❗Upcoming (Next 3 days):"</li>
+     * </ul>
+     *
+     * <p>Each task is numbered in the list for readability.</p>
+     *
+     * @return a formatted reminder string including overdue and upcoming tasks
+     */
+    public String getReminder() {
+        LocalDate today = LocalDate.now();
+        LocalDate limit = today.plusDays(3);
+
+        String upcomingTasks = "";
+        String overdueTasks = "";
+        int upcomingCount = 1;
+        int overdueCount = 1;
+
+        for (int i = 0; i < num; i++) {
+            Task t = tasks[i];
+
+            if (t == null || t.getStatus()) {
+                continue;
+            }
+
+            LocalDate taskDate = t.getDate();
+            if (taskDate != null) {
+                if (taskDate.isBefore(today)) {
+                    overdueTasks = overdueTasks + overdueCount + ". " + t + "\n";
+                    overdueCount++;
+                }
+                if (!taskDate.isBefore(today) && !taskDate.isAfter(limit)) {
+                    upcomingTasks = upcomingTasks + upcomingCount + ". " + t + "\n";
+                    upcomingCount++;
+                }
+            }
+        }
+        String finalResponse = "Hi, Here is your Reminder: \n\n";
+        if (overdueCount == 1 && upcomingCount == 1) {
+            return "Hi, there is no tasks due recently 👏";
+        }
+        if (overdueCount > 1) {
+            finalResponse += "🚨 Urgent (Overdue):\n" + overdueTasks + "\n";
+        }
+
+        if (upcomingCount > 1) {
+            finalResponse += "❗Upcoming (Next 3 days):\n" + upcomingTasks;
+        }
+        return finalResponse;
     }
 }
