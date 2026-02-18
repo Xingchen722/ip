@@ -29,11 +29,9 @@ public class Ui {
     /**
      * Returns the welcome message shown to the user.
      */
-    public void welcome() {
-        printLine();
-        System.out.println("Hello! I'm lars.Lars");
-        System.out.println("What can I do for you?");
-        printLine();
+    // 在 Ui.java 中添加
+    public String getWelcomeMessage() {
+        return "Hello! I'm Lars\nWhat can I do for you?";
     }
 
     /**

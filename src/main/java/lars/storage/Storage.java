@@ -3,8 +3,6 @@ package lars.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -26,7 +24,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
-        this.taskStorageFile = new File(filePath + "/lars.txt");
+        this.taskStorageFile = new File(filePath + "lars.txt");
     }
 
     /**
@@ -37,11 +35,13 @@ public class Storage {
      */
     public void save(Task[] tasks, int num) throws LarsException {
         try {
-            Files.createDirectories(Path.of(this.filePath));
+            File parent = taskStorageFile.getParentFile();
+            if (parent != null && !parent.exists()) {
+                parent.mkdirs();
+            }
             if (!taskStorageFile.exists()) {
                 taskStorageFile.createNewFile();
             }
-
         } catch (IOException e) {
             throw new LarsException("The storage file cannot be created: " + e.getMessage());
         }

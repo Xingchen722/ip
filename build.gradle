@@ -48,7 +48,7 @@ test {
 }
 
 application {
-    mainClass.set("lars.Lars")
+    mainClass.set("Launcher")
 }
 
 shadowJar {
@@ -60,3 +60,4 @@ shadowJar {
 run{
     standardInput = System.in
 }
+

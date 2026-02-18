@@ -52,7 +52,8 @@ public class Deadline extends Task {
     public String toString() {
         if (by != null) {
             String pattern = hasTime ? "MMM d yyyy HH:mm" : "MMM d yyyy";
-            return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern(pattern)) + ")";
+            return "[D]" + super.toString() + " (by: "
+                    + by.format(DateTimeFormatter.ofPattern(pattern, java.util.Locale.ENGLISH)) + ")";
         } else {
             return "[D]" + super.toString() + " (by: " + bySingle + ")";
         }
@@ -66,7 +67,8 @@ public class Deadline extends Task {
     public String toStorageString() {
         if (by != null) {
             String pattern = hasTime ? "MMM d yyyy HH:mm" : "MMM d yyyy";
-            return "D | " + super.toStorageString() + " | " + by.format(DateTimeFormatter.ofPattern(pattern));
+            return "D | " + super.toStorageString() + " | "
+                    + by.format(DateTimeFormatter.ofPattern(pattern, java.util.Locale.ENGLISH));
         } else {
             return "D | " + super.toStorageString() + " | " + bySingle;
         }
