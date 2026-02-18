@@ -47,7 +47,8 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (commandType.equals("ExitCommand")) {
-            javafx.animation.PauseTransition delay = new javafx.animation.PauseTransition(javafx.util.Duration.seconds(1.5));
+            javafx.animation.PauseTransition delay =
+                    new javafx.animation.PauseTransition(javafx.util.Duration.seconds(1.5));
             delay.setOnFinished(event -> javafx.application.Platform.exit());
             delay.play();
         }
