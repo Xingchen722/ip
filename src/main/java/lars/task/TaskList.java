@@ -1,5 +1,7 @@
 package lars.task;
 
+import java.util.Arrays;
+
 /**
  * Represents a collection of tasks with operations to add, delete, and retrieve tasks.
  */
@@ -44,8 +46,9 @@ public class TaskList {
      * @return The removed Task object.
      */
     public Task deleteTask(int index) {
+        assert index >= 0 && index < num : "Index out of bounds: " + index;
         Task t = tasks[index];
-        for (int i = index; i < num -1; i++) {
+        for (int i = index; i < num - 1; i++) {
             tasks[i] = tasks[i + 1];
         }
         tasks[num - 1] = null;
@@ -60,6 +63,7 @@ public class TaskList {
 
     /** @return The Task at the specified index. */
     public Task getTask(int index) {
+        assert index >= 0 && index < num : "Index out of bounds: " + index;
         return tasks[index];
     }
 
@@ -68,13 +72,17 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Finds and returns a list of tasks that contain the specified keyword.
+     * @param s The keyword to search for in task descriptions.
+     * @return A new {@code TaskList} containing all matching tasks.
+     */
     public TaskList findTasks(String s) {
-        TaskList matchingTasks = new TaskList();
-        for (int i = 0; i < num; i++) {
-            if (tasks[i].getTask().contains(s)) {
-                matchingTasks.addTask(tasks[i]);
-            }
-        }
-        return matchingTasks;
+        assert s != null : "Task list should not be null";
+        return new TaskList(
+                Arrays.stream(tasks, 0, num)
+                        .filter(t -> t != null && t.getTask().contains(s))
+                        .toArray(Task[]::new)
+        );
     }
 }
