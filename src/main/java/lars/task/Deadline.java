@@ -19,7 +19,7 @@ public class Deadline extends Task {
      * If the string matches "y-M-d HHmm", it is stored as a LocalDateTime with time.
      * If it matches "y-M-d", it is stored as the start of that day.
      * Otherwise, it is stored as a raw string.
-     * * @param status   The description of the task.
+     * @param status   The description of the task.
      * @param byString The deadline date/time string provided by the user.
      */
     public Deadline(String status, String byString) {
@@ -52,7 +52,8 @@ public class Deadline extends Task {
     public String toString() {
         if (by != null) {
             String pattern = hasTime ? "MMM d yyyy HH:mm" : "MMM d yyyy";
-            return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern(pattern)) + ")";
+            return "[D]" + super.toString() + " (by: "
+                    + by.format(DateTimeFormatter.ofPattern(pattern, java.util.Locale.ENGLISH)) + ")";
         } else {
             return "[D]" + super.toString() + " (by: " + bySingle + ")";
         }
@@ -64,9 +65,10 @@ public class Deadline extends Task {
      */
     @Override
     public String toStorageString() {
-        if (by != null ) {
+        if (by != null) {
             String pattern = hasTime ? "MMM d yyyy HH:mm" : "MMM d yyyy";
-            return "D | " + super.toStorageString() + " | " + by.format(DateTimeFormatter.ofPattern(pattern));
+            return "D | " + super.toStorageString() + " | "
+                    + by.format(DateTimeFormatter.ofPattern(pattern, java.util.Locale.ENGLISH));
         } else {
             return "D | " + super.toStorageString() + " | " + bySingle;
         }

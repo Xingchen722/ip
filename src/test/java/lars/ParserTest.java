@@ -1,62 +1,38 @@
 package lars;
 
+import lars.command.Command;
+import lars.command.ExitCommand;
 import lars.exceptions.LarsException;
 import lars.parser.Parser;
-import lars.storage.Storage;
-import lars.task.TaskList;
-import lars.ui.Ui;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
+
     @Test
     public void parser_bye() throws LarsException {
-        Storage so = new Storage("./data/test.txt");
-        TaskList tl = new TaskList();
-        Ui ui = new Ui() {
-            @Override
-            public String readCommand() {
-                return "bye";
-            }
-            @Override
-            public void showBye() {
-            }
-        };
-        boolean isExit = Parser.parse(so, tl, ui);
-        assertTrue(isExit, "Bye command should return true to exit the loop.");
+        // New structure: Parser.parse only accepts string instructions
+        Command c = Parser.parse("bye");
+
+        // 检查返回的是否是 ExitCommand，并且 isExit() 是否为 true
+        assertTrue(c instanceof ExitCommand, "Bye command should return an instance of ExitCommand.");
+        assertTrue(c.isExit(), "ExitCommand should return true for isExit().");
     }
 
     @Test
-    public void parser_invalid() throws LarsException {
-        Storage so = new Storage("./data/test.txt");
-        TaskList tl = new TaskList();
-        Ui ui = new Ui() {
-            @Override
-            public String readCommand() {
-                return "blahblah";
-            }
-        };
-
+    public void parser_invalid() {
+        // Check whether the unknown instruction throws an exception
         assertThrows(LarsException.class, () -> {
-            Parser.parse(so, tl, ui);
+            Parser.parse("blahblah");
         }, "Undefined commands should throw LarsException.");
     }
 
     @Test
     public void parser_emptyTodo_exceptionThrown() {
-        Storage so = new Storage("./data/test.txt");
-        TaskList tl = new TaskList();
-        Ui ui = new Ui() {
-            @Override
-            public String readCommand() {
-                return "todo";
-            }
-        };
+        // Check whether an empty todo throws an exception
         assertThrows(LarsException.class, () -> {
-            Parser.parse(so, tl, ui);
+            Parser.parse("todo");
         }, "Empty todo description should throw LarsException.");
     }
 }
-
-

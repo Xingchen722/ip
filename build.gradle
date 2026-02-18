@@ -2,10 +2,15 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'checkstyle'
 }
 
 repositories {
     mavenCentral()
+}
+
+checkstyle {
+    toolVersion = '11.0.1'
 }
 
 dependencies {
@@ -43,7 +48,7 @@ test {
 }
 
 application {
-    mainClass.set("lars.Lars")
+    mainClass.set("Launcher")
 }
 
 shadowJar {
@@ -55,3 +60,4 @@ shadowJar {
 run{
     standardInput = System.in
 }
+

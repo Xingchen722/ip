@@ -1,5 +1,6 @@
 package lars;
 
+import lars.command.Command;
 import lars.exceptions.LarsException;
 import lars.parser.Parser;
 import lars.storage.Storage;
@@ -14,6 +15,7 @@ public class Lars {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private String commandType;
 
     /**
      * Constructs a new Lars instance.
@@ -30,25 +32,22 @@ public class Lars {
         }
     }
 
-    public void run() {
-        ui.welcome();
-        boolean isExit = false;
-        while(!isExit) {
-            try {
-                isExit = Parser.parse(storage, tasks, ui);
-            } catch (LarsException e) {
-                ui.readError(e.getMessage());
-            } catch (Exception e) {
-                ui.readError("An unexpected error occurred: " + e.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            commandType = c.getClass().getSimpleName();
+            return c.getString();
+        } catch (LarsException e) {
+            return "Error: " + e.getMessage();
         }
     }
 
-    /**
-     * Main entry point for the application.
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        new Lars("./data").run();
+    public String getCommandType() {
+        return commandType;
+    }
+
+    public String getWelcome() {
+        return ui.getWelcomeMessage();
     }
 }

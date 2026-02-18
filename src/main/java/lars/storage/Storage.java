@@ -1,15 +1,13 @@
 package lars.storage;
 
-import lars.exceptions.LarsException;
-import lars.task.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.Scanner;
+
+import lars.exceptions.LarsException;
+import lars.task.Task;
 
 /**
  * Handles loading tasks from and saving tasks to a local file.
@@ -18,9 +16,15 @@ public class Storage {
     private final String filePath;
     private final File taskStorageFile;
 
+    /**
+     * Constructs a new Storage object that handles saving and loading tasks
+     * to a file at the specified path.
+     *
+     * @param filePath The directory path where the task storage file will be located.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
-        this.taskStorageFile = new File(filePath + "/lars.txt");
+        this.taskStorageFile = new File(filePath + "lars.txt");
     }
 
     /**
@@ -31,11 +35,13 @@ public class Storage {
      */
     public void save(Task[] tasks, int num) throws LarsException {
         try {
-            Files.createDirectories(Path.of(this.filePath));
+            File parent = taskStorageFile.getParentFile();
+            if (parent != null && !parent.exists()) {
+                parent.mkdirs();
+            }
             if (!taskStorageFile.exists()) {
                 taskStorageFile.createNewFile();
             }
-
         } catch (IOException e) {
             throw new LarsException("The storage file cannot be created: " + e.getMessage());
         }
