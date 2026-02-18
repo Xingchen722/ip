@@ -89,7 +89,7 @@ public class Storage {
 
                 if (task != null) {
                     if (isDone) {
-                        task.BeDone();
+                        task.markDone();
                     }
                     tasks[count++] = task;
                 }
