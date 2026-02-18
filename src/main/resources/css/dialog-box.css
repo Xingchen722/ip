@@ -18,6 +18,11 @@
     -fx-background-color: lightpink;
 }
 
+.error-bubble {
+    -fx-background-color: #FFEBEE !important;
+    -fx-border-color: #FFCDD2 !important;
+}
+
 .reply-label {
     -fx-background-radius: 1em 1em 1em 0;
     -fx-border-radius: 1em 1em 1em 0;

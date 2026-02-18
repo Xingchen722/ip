@@ -40,6 +40,12 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = lars.getResponse(input);
         String commandType = lars.getCommandType();
+        DialogBox larsDialog = DialogBox.getLarsDialog(response, larsImage, commandType);
+
+        if ("Error".equals(commandType)) {
+            larsDialog.flipToErrorStyle();
+        }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getLarsDialog(response, larsImage, commandType)

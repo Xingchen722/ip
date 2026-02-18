@@ -55,6 +55,9 @@ public class DialogBox extends HBox {
 
     private void changeDialogStyle(String commandType) {
         switch (commandType) {
+        case "Error":
+            dialog.getStyleClass().add("error-bubble");
+            break;
         case "AddCommand":
             dialog.getStyleClass().add("add-label");
             break;
@@ -84,4 +87,7 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    public void flipToErrorStyle() {
+        dialog.getStyleClass().add("error-bubble");
+    }
 }
