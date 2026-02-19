@@ -35,7 +35,10 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.setWrapText(true);
         dialog.setMaxWidth(400);
+
         displayPicture.setImage(img);
+
+        dialog.getStyleClass().add("label");
     }
 
     /**
@@ -46,15 +49,21 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        dialog.getStyleClass().add("reply-label");
+        dialog.getStyleClass().add("lars-label");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setAlignment(Pos.TOP_RIGHT);
+        db.dialog.getStyleClass().add("user-bubble");
+        return db;
     }
 
     private void changeDialogStyle(String commandType) {
         switch (commandType) {
+        case "Error":
+            dialog.getStyleClass().add("error-bubble");
+            break;
         case "AddCommand":
             dialog.getStyleClass().add("add-label");
             break;
@@ -78,10 +87,15 @@ public class DialogBox extends HBox {
     public static DialogBox getLarsDialog(String text, Image img, String commandType) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.dialog.getStyleClass().add("lars-bubble");
+
         if (commandType != null) {
             db.changeDialogStyle(commandType);
         }
         return db;
     }
 
+    public void flipToErrorStyle() {
+        dialog.getStyleClass().add("error-bubble");
+    }
 }
