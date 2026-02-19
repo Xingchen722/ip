@@ -1,13 +1,25 @@
 .label {
-    -fx-background-color: linear-gradient(to bottom right, #00ffbf, #00ddff);
-    -fx-border-color: #d55e00 #009e73 #cc79a7 #0072b2;
-    -fx-border-width: 2px;
+    -fx-background-color: #FAFF72;
+    -fx-border-color: rgba(0,0,0,0.08);;
+    -fx-border-width: 1px;
+    -fx-padding: 8 12 8 12;
+    -fx-text-fill: black;
+}
+
+.user-bubble {
+    -fx-background-color: #A7E6FF;
     -fx-background-radius: 1em 1em 0 1em;
     -fx-border-radius: 1em 1em 0 1em;
 }
 
+.lars-bubble {
+    -fx-background-color: #FAFF72;
+    -fx-background-radius: 1em 1em 1em 0;
+    -fx-border-radius: 1em 1em 1em 0;
+}
+
 .add-label {
-    -fx-background-color: yellow;
+    -fx-background-color: #FAFF72;
 }
 
 .marked-label {
@@ -21,11 +33,6 @@
 .error-bubble {
     -fx-background-color: #FFEBEE !important;
     -fx-border-color: #FFCDD2 !important;
-}
-
-.reply-label {
-    -fx-background-radius: 1em 1em 1em 0;
-    -fx-border-radius: 1em 1em 1em 0;
 }
 
 #displayPicture {
