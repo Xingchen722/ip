@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -25,10 +26,22 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/me.png"));
     private Image larsImage = new Image(this.getClass().getResourceAsStream("/images/oppo.png"));
+    private boolean shouldAutoScroll = true;
 
+    /**
+     * Initializes auto-scroll behavior for the dialog pane.
+     */
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.vvalueProperty().addListener((obs, oldVal, newVal) -> {
+            shouldAutoScroll = newVal.doubleValue() >= 0.98;
+        });
+
+        dialogContainer.heightProperty().addListener((obs, oldVal, newVal) -> {
+            if (shouldAutoScroll) {
+                scrollPane.setVvalue(1.0);
+            }
+        });
     }
 
     /**
@@ -46,11 +59,13 @@ public class MainWindow extends AnchorPane {
             larsDialog.flipToErrorStyle();
         }
 
+        shouldAutoScroll = true;
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getLarsDialog(response, larsImage, commandType)
+                larsDialog
         );
         userInput.clear();
+        Platform.runLater(() -> scrollPane.setVvalue(1.0));
 
         if ("ExitCommand".equals(commandType)) {
             javafx.animation.PauseTransition delay =
@@ -60,21 +75,31 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Injects the Lars instance and displays the welcome message.
+     */
     public void setLars(Lars lars) {
         this.lars = lars;
         String welcomeText = lars.getWelcome();
 
+        shouldAutoScroll = true;
         dialogContainer.getChildren().addAll(
                 DialogBox.getLarsDialog(welcomeText, larsImage, "Welcome")
         );
+        Platform.runLater(() -> scrollPane.setVvalue(1.0));
     }
 
+    /**
+     * Handles the remind action and appends the reminder dialog.
+     */
     @FXML
     private void handleRemind() {
         String response = lars.getResponse("remind");
+        shouldAutoScroll = true;
         dialogContainer.getChildren().addAll(
                 DialogBox.getLarsDialog(response, larsImage, "reminder")
         );
+        Platform.runLater(() -> scrollPane.setVvalue(1.0));
     }
 }
 
