@@ -29,9 +29,9 @@ public class Ui {
     /**
      * Returns the welcome message shown to the user.
      */
-    // 在 Ui.java 中添加
     public String getWelcomeMessage() {
-        return "Hello! I'm Lars\nWhat can I do for you?";
+        return "Hello! I'm Lars 💛💜\nSo glad to see you\n" +
+                "You can type \"help\" to see what I can do 🧞‍";
     }
 
     /**

@@ -6,6 +6,7 @@ import lars.command.AddCommand;
 import lars.command.Command;
 import lars.command.DeleteCommand;
 import lars.command.ExitCommand;
+import lars.command.HelpCommand;
 import lars.command.ListCommand;
 import lars.command.MarkCommand;
 import lars.command.RemindCommand;
@@ -101,6 +102,10 @@ public class Parser {
 
         case "remind":
             return new RemindCommand();
+
+        case "help":
+            return new HelpCommand();
+
         default:
             throw new LarsException("I'm sorry, but I don't know what that means :-(");
         }
