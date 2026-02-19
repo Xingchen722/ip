@@ -2,6 +2,7 @@ package lars;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 import lars.command.Command;
@@ -24,7 +25,7 @@ public class ParserTest {
         assertTrue(c instanceof ExitCommand, "Bye command should return an instance of ExitCommand.");
         assertTrue(c.isExit(), "ExitCommand should return true for isExit().");
     }
-    
+
     /**
      * Verifies unknown commands throw LarsException.
      */
