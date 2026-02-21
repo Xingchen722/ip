@@ -81,9 +81,9 @@ Adds a task with a start and end time.
 > ```
 
 > **Examples**
-> *   `event project meeting /from Mon 2pm /to 4pm` (Day and Time)
-> *   `event music festival /from 2026-05-01 /to 2026-05-04` (Specific Dates)
-> *   `event birthday party /from tonight /to late night` (Relative Time)
+> ```text
+> event project meeting /from 2026-02-10 /to 2026-02-10
+> ```
 
 ---
 
@@ -96,9 +96,9 @@ Adds a task that needs to be done by a specific date.
 > ```
 
 > **Example**
-> ```text
-> deadline ip /by 2026-02-20
-> ```
+>*   deadline return library book /by 2026-02-15
+>*   deadline return library book /by 2026-02-15 1800
+>*   deadline return book /by Sunday
 
 ---
 
