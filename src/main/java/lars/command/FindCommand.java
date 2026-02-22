@@ -29,7 +29,7 @@ public class FindCommand extends Command {
         this.response = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < matchingTasks.getSize(); i++) {
             Task t = matchingTasks.getTask(i);
-            this.response += (i + 1) + "." + t.toString() + "\n";
+            this.response += (i + 1) + ". " + t.toString() + "\n";
         }
     }
 }
