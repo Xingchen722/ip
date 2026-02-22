@@ -6,6 +6,10 @@ import lars.task.Task;
 import lars.task.TaskList;
 import lars.ui.Ui;
 
+/**
+ * Creates a new FindCommand with the specified search keyword.
+ * The string to look for within task descriptions.
+ */
 public class FindCommand extends Command {
     private String s;
 
@@ -23,7 +27,7 @@ public class FindCommand extends Command {
         }
 
         this.response = "Here are the matching tasks in your list:\n";
-        for(int i = 0; i < matchingTasks.getSize(); i++) {
+        for (int i = 0; i < matchingTasks.getSize(); i++) {
             Task t = matchingTasks.getTask(i);
             this.response += (i + 1) + "." + t.toString() + "\n";
         }
