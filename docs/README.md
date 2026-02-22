@@ -22,18 +22,19 @@ Prerequisites:
 
 ### Quick Review
 
-| Feature | Format |
-|---------|--------|
-| Help | `help` |
-| List | `list` |
-| Todo | `todo <description>` |
-| Event | `event <description> /from <start> /to <end>` |
-| Deadline | `deadline <description> /by <yyyy-mm-dd>` |
-| Mark | `mark <index>` |
-| Unmark | `unmark <index>` |
-| Delete | `delete <index>` |
-| Remind | `remind` or click the `⏰` button |
-| Bye | `bye` |
+| Feature  | Format                                         |
+|----------|------------------------------------------------|
+| Help     | `help`                                         |
+| List     | `list`                                         |
+| Todo     | `todo <description>`                           |
+| Event    | `event <description> /from <start> /to <end>`  |
+| Deadline | `deadline <description> /by <yyyy-mm-dd>`      |
+| Mark     | `mark <index>`                                 |
+| Unmark   | `unmark <index>`                               |
+| Find     | `find <description>`                           |
+| Delete   | `delete <index>`                               |
+| Remind   | `remind` or click the `⏰` button               |
+| Bye      | `bye`                                          |
 
 ## More Details
 
@@ -115,7 +116,20 @@ Marks a specific task as completed or incomplete.
 
 ---
 
-### 7. Delete - remove tasks
+### 7. Find - find tasks
+Find tasks according to keyword
+
+> **Format**
+> ```text
+> find <description>
+> ```
+
+> **Example**
+> ```text
+> find book
+> ```
+
+### 8. Delete - remove tasks
 Permanently deletes a task from the list.
 
 > **Format**
@@ -130,7 +144,7 @@ Permanently deletes a task from the list.
 
 ---
 
-### 8. Remind - Check urgent tasks
+### 9. Remind - Check urgent tasks
 Shows tasks that are overdue or approaching their deadline.
 
 > **Format**
@@ -139,7 +153,7 @@ Shows tasks that are overdue or approaching their deadline.
 
 ---
 
-### 9. Bye - Exit the program
+### 10. Bye - Exit the program
 Closes the application.
 
 > **Format**

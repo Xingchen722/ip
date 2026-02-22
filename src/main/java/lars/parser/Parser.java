@@ -6,6 +6,7 @@ import lars.command.AddCommand;
 import lars.command.Command;
 import lars.command.DeleteCommand;
 import lars.command.ExitCommand;
+import lars.command.FindCommand;
 import lars.command.HelpCommand;
 import lars.command.ListCommand;
 import lars.command.MarkCommand;
@@ -96,6 +97,12 @@ public class Parser {
                 throw new LarsException("Please specify a task index to unmark.");
             }
             return new MarkCommand(parseTaskIndex(parts[1]), false);
+
+        case "find":
+            if (parts.length < 2) {
+                throw new LarsException("Please write task you want to find");
+            }
+            return new FindCommand(parts[1]);
 
         case "bye":
             return new ExitCommand();

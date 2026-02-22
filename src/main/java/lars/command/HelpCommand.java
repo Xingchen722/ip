@@ -14,7 +14,7 @@ public class HelpCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         this.response =
                 "Here are the commands you can use:\n\n"
-                        + "1. list\n\n"
+                        + "1. list\n"
 
                         + "2. todo <description>\n"
                         + "   👉Example:\n"
@@ -31,9 +31,10 @@ public class HelpCommand extends Command {
                         + "     event meeting /from 2pm /to 4pm\n\n"
 
                         + "5. mark <number>\n"
-                        + "6. unmark <number>\n"
-                        + "7. delete <number>\n"
-                        + "8. remind (or press ⏰)\n"
-                        + "9. bye";
+                        + "6. find <description>\n"
+                        + "7. unmark <number>\n"
+                        + "8. delete <number>\n"
+                        + "9. remind (or press ⏰)\n"
+                        + "10. bye";
     }
 }

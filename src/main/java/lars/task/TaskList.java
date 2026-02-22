@@ -82,7 +82,7 @@ public class TaskList {
         assert s != null : "Task list should not be null";
         return new TaskList(
                 Arrays.stream(tasks, 0, num)
-                        .filter(t -> t != null && t.getTask().contains(s))
+                        .filter(t -> t != null && t.getTask().toLowerCase().contains(s))
                         .toArray(Task[]::new)
         );
     }
